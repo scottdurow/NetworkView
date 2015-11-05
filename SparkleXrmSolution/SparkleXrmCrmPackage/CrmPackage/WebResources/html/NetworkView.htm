@@ -1,0 +1,378 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Visualisation</title>
+
+    <style>
+        html {
+            /*ms-content-zooming: none;*/
+            ms-touch-action: none;
+            /*content-zooming: none;*/
+            touch-action: none;
+        }
+        body {
+            overflow: hidden;
+        }
+        button {
+            display: inline;
+            text-overflow: ellipsis;
+            overflow-x: hidden;
+            overflow-y: hidden;
+            word-wrap: normal;
+            text-align: center;
+            border: 1px solid #c6c6c6;
+            background-color: #FDFDFD;
+            margin-right: 4px;
+            margin-left: 4px;
+            height: 20px;
+            width: auto;
+        }
+        button:hover {
+            background-color: rgb(177, 214, 240) !important;
+        }
+        #messages {
+            width: 300px;
+        }
+
+        body {
+            margin-top: 0px;
+            margin-bottom: 0px;
+            margin-left: 0px;
+            margin-right: 0px;
+            padding: 0;
+        }
+
+        .link {
+            fill: none;
+            stroke: #FBFAF7;
+            stroke-width: 3;
+            stroke-dasharray: 0.5,7;
+            stroke-linecap: round;
+        }
+        .link-selected {
+            stroke-width: 5;
+        }
+        .nodetext {
+            pointer-events: none;
+            font-size: 10px;
+            font-family: 'Segoe UI';
+            fill: #FBFAF7;
+        }
+       
+        .infoBox {
+            transition: opacity 0.3s;
+            position: absolute;
+            text-align: left;
+            min-width: 120px;
+            max-width: 250px;
+            padding: 2px;
+            font: 9px 'Segoe UI';
+            background: #ffffff;
+            background-position: left bottom;
+            background-repeat: repeat-x;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            border: 1px solid #989898;
+            min-height: 60px;
+            background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAYAAAAfCAIAAABLdytMAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAAYdEVYdFNvZnR3YXJlAHBhaW50Lm5ldCA0LjAuNWWFMmUAAABHSURBVChT7ci7FYAgFATR6b/YBygoKn4ik11L8J6Jhtv86/W1LsNpGIbDsBu23iVWw9KaRKtVYjZMpUiUnCVyShIpQiJExAPmtCIfQ0TNmQAAAABJRU5ErkJggg==);
+        }
+        .infoBox li{
+            list-style-type:none;
+        }
+        .button-openrecord {
+            cursor: pointer;
+            width: 20px;
+            height: 16px;
+            background-repeat: no-repeat;
+            background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAQCAYAAAAWGF8bAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAyJpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMy1jMDExIDY2LjE0NTY2MSwgMjAxMi8wMi8wNi0xNDo1NjoyNyAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvIiB4bWxuczp4bXBNTT0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL21tLyIgeG1sbnM6c3RSZWY9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9zVHlwZS9SZXNvdXJjZVJlZiMiIHhtcDpDcmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENTNiAoV2luZG93cykiIHhtcE1NOkluc3RhbmNlSUQ9InhtcC5paWQ6MzlGNTM0OTVBOTY1MTFFM0FDQzNGNTEyOEEwNEJEQjkiIHhtcE1NOkRvY3VtZW50SUQ9InhtcC5kaWQ6MzlGNTM0OTZBOTY1MTFFM0FDQzNGNTEyOEEwNEJEQjkiPiA8eG1wTU06RGVyaXZlZEZyb20gc3RSZWY6aW5zdGFuY2VJRD0ieG1wLmlpZDozOUY1MzQ5M0E5NjUxMUUzQUNDM0Y1MTI4QTA0QkRCOSIgc3RSZWY6ZG9jdW1lbnRJRD0ieG1wLmRpZDozOUY1MzQ5NEE5NjUxMUUzQUNDM0Y1MTI4QTA0QkRCOSIvPiA8L3JkZjpEZXNjcmlwdGlvbj4gPC9yZGY6UkRGPiA8L3g6eG1wbWV0YT4gPD94cGFja2V0IGVuZD0iciI/PkEiSLYAAACXSURBVHjaYkxLS2MgE3QAsSCaWAULBYaFQtmCSAZ3MpFpYAUQKwNxOroEyMD/JOCvQJwA1esCxKuA+D0Qr0Y2kFhwHYjNgXgBmmGuUJokA0GGmADxFWjYwQ2bOXPmPVgwgNiwSGEkwaWhSC6DGdYJM5icWA4DYiUkwxiQXMlAbizDDPiPLZapCkYNHIQGsuCKfnIBQIABAO+VLqATxz/3AAAAAElFTkSuQmCC);
+        }
+        .button-closeImage {
+            float: right;
+            cursor: pointer;
+            width: 16px;
+            height: 16px;
+            background-repeat: no-repeat;
+            background-image: url(data:image/png;base64,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);
+        }
+        .infoboxButtons {
+            float: left;
+        }
+        .button {
+            display: inline-block;
+        }
+        #userList {
+            pointer-events: none;
+            position: absolute;
+            left: 0px;
+            top: 0px;
+            width: 250px;
+            clear: both;
+        }
+        #userList li {
+            display: table;
+            border-collapse: collapse;
+            width: 100%;
+        }
+        #connectionList li {
+            display: table;
+            border-collapse: collapse;
+            width: 100%;
+        }
+        #connectionList {
+            pointer-events: none;
+            position: absolute;
+            right: 0px;
+            top: 0px;
+            width: 250px;
+            clear: both;
+        }
+        .image-party {
+            pointer-events:all;
+            cursor: pointer;
+            display: table-cell;
+            width: 32px;
+            height: 32px;
+            background-repeat: no-repeat;
+            
+        }
+        .image-refresh32 {
+            background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAABmJLR0QAAAAAAAD5Q7t/AAAACXBIWXMAAABIAAAASABGyWs+AAAACXZwQWcAAAAgAAAAIACH+pydAAABj0lEQVRYw+2Wu0oDQRiFz78GBEV9ApNKRAxWNvYR8h6KQhQEsY+lPoSIYipfQBBE7IR0SXwBQRCxEbwElM/CFYfFTXZmIzY51b/DnMtcdmakIYb4Z5gvAZiUVJVUljQdN99Kaks6M7OnFN6imTWDkwJF4AToko434AgoJrh1oJHHfK2PcRIvwIpjTnAAYD8h3ga2gHlgHJgAysA2cJPoe+XU/gGAdUegC2wAUY/+BWAHeP9lVvwCAKV4Tb/NKx7cxiACHDvkmgevzu/IHgCYckbfAkZymqcGSFvPqqTRuD4ws48s5pJ2vaZZUiGlvezU5xnMlyTNSzrt0e06cyrgwJm6Cd9R+SDKL/E3Ae6cuphFKBRpe6Dt1MuSOiHiwIKk2fjz0sweshKDfsOERgR0nLvBby+FHkQOf9PhH4ZMX56juMLP7fkKlLwDxEK+l1EE1JzgAKtB5o5ov+t4DJiLw7USffdymTshfB8kzyH7pl+ILE+yLl9PspmsuoN4lJqke0lNSRdm9jjQkQ8xxF/jEzCz1zwkOFL2AAAAAElFTkSuQmCC);
+        }
+        .image-user32 {
+            background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAABHNCSVQICAgIfAhkiAAAAAlwSFlzAAALEgAACxIB0t1+/AAAABZ0RVh0Q3JlYXRpb24gVGltZQAwNC8xNi8xM3KL1eQAAAAcdEVYdFNvZnR3YXJlAEFkb2JlIEZpcmV3b3JrcyBDUzbovLKMAAABC0lEQVRYhe1W2w2DMAw8qg7ACBkhnaCMwggdgRGyEWGDjtARsoH7kdCmiDxcUgEVJ1lC2NgXYl9SERHWxGnV6geBg8ACAg0ADYCcafeODyLiWkdhdNx83OJNpPiI5pcEdAYBzclZEU8Jc4Or3IS7m4KhUMwbe2vC1cfQ/xO9V7jnrnw0zhTUsGonASgAZsZ/A3CHVcapf1EPtERkvBWrmRjl+Y37psgWhPZcejEyEJPsiVRxEUhM9Kl4OhInlhBQMwl9tM5imNuul50TLSITfpXRZtEcqSkodWUOng2bPwsusDP9LbTLEUSuEAkAV1ghErD7Wk9iDKwIPVzhwT1Hwb0PFMfme+Ag8P8EnlloQNWQIXkxAAAAAElFTkSuQmCC);
+        }
+        .image-team32 {
+            background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAABHNCSVQICAgIfAhkiAAAAAlwSFlzAAALEgAACxIB0t1+/AAAABZ0RVh0Q3JlYXRpb24gVGltZQAwNC8xNi8xM3KL1eQAAAAcdEVYdFNvZnR3YXJlAEFkb2JlIEZpcmV3b3JrcyBDUzbovLKMAAABeklEQVRYhe2V4U3DQAyFvyL+NyOEDcIEwAZhgrIBHaEjdIQyAd2AbEA3IBuQTvD4ca5aXZ2SOypCJSxFiaw83zv72Z5IYky7GvX0SyZQAQ0goAXqXAKTDA0Udug08t8Cm9RgORm4dw6HzCxcpAYaoHP8698i0AEPRgSCHh7JqD+ki7AAnuy9ZJ+JlX0vjdBwkzT0KSRttLeF+esDXyepTIiZRGCuY6sktZFvlUIgpQQNcBf5thy35NZKNMhSROgp35sHSaJKFeGMMHBKwjjeWWvPGnjBJ3sWAme3Pz0Ja0JaRRBgdeLffGxPe1ROy3U2C75rrSRsXwa8zTYlbMIhtx+MHV0DKWn8/EEJerGnAtWSPizAmwUeOmIHY6+dpJTAnDBOb8xXEDZew37zeZaOjRiVptid1eZfHPg2PenMwsZBVlHtWvk1nTsEsrBxkM4BeL7GIZCFjdvQWwzexvM0kIeNblFIelZQ7kfE/F3Sq6SZc/ts7P82HJ3AF91mDX6UxSE7AAAAAElFTkSuQmCC);
+        }
+        .image-plus32 {
+            background-repeat: no-repeat;
+            background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAOwgAADsIBFShKgAAAABh0RVh0U29mdHdhcmUAcGFpbnQubmV0IDQuMC41ZYUyZQAAAJpJREFUWEftjgEGwDAQBPv/T6cMoVaT2u5pWjoMsWfI1lpban+s4P/Atz/Qu6MudFEsutBFsehCF8WiC10Uiy50USy60EWx6EIXxaIL3Sjue6UK+/RYrMI+PRarsE+PxSrs02OxCvvoeEXvjrrQRbHoQhfFogtdFIsudFEsutBFsehCF8WiC10Uiy50d+MK/g+86wPLPB2fs207b0qCQ8K41rYAAAAASUVORK5CYII=);
+         }
+        .image-minus32 {
+            background-repeat: no-repeat;
+            background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAOwgAADsIBFShKgAAAABh0RVh0U29mdHdhcmUAcGFpbnQubmV0IDQuMC41ZYUyZQAAAGFJREFUWEftjjEKwDAMA/P/T7upaBaRehK2Bx0oBGnwrYhoDdifcr67uN8r8D5o6rGABSxggdkCp1eGQZ+O4jDo01EcBn06isOgT0dxGPR/YwUWsIAFLGCBWQJtuZZ1ifUAcb7F/+UoPecAAAAASUVORK5CYII=);
+        }
+        .image-connection {
+            background-repeat: no-repeat;
+            background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAyJpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMC1jMDYxIDY0LjE0MDk0OSwgMjAxMC8xMi8wNy0xMDo1NzowMSAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvIiB4bWxuczp4bXBNTT0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL21tLyIgeG1sbnM6c3RSZWY9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9zVHlwZS9SZXNvdXJjZVJlZiMiIHhtcDpDcmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENTNS4xIFdpbmRvd3MiIHhtcE1NOkluc3RhbmNlSUQ9InhtcC5paWQ6QzYwRTA0OUNGQjg4MTFFMjlFMDVCNUNCMkE2NzIzQ0QiIHhtcE1NOkRvY3VtZW50SUQ9InhtcC5kaWQ6QzYwRTA0OURGQjg4MTFFMjlFMDVCNUNCMkE2NzIzQ0QiPiA8eG1wTU06RGVyaXZlZEZyb20gc3RSZWY6aW5zdGFuY2VJRD0ieG1wLmlpZDpDNjBFMDQ5QUZCODgxMUUyOUUwNUI1Q0IyQTY3MjNDRCIgc3RSZWY6ZG9jdW1lbnRJRD0ieG1wLmRpZDpDNjBFMDQ5QkZCODgxMUUyOUUwNUI1Q0IyQTY3MjNDRCIvPiA8L3JkZjpEZXNjcmlwdGlvbj4gPC9yZGY6UkRGPiA8L3g6eG1wbWV0YT4gPD94cGFja2V0IGVuZD0iciI/PnINl88AAAE4SURBVHjazFbbDcIwDGwq/ukIbEA3YZWwQTdgBVZgg2zQsgEjpBOERHKlKORl41AsnVTZUePaZ1+FMabb0/qEf7RQFgagwMduIlKBk8VicQz8KyTxal2BKXJ5B77pFy3IlZq9DYeIT2fOp2IlJgtMBVTmRYqdhY6EAQaL2XzaDLEOgc2SZ0RiDwwWN6/nbiquhfbkWiMwY8haYCwHJHythir4FdEQk604oIKeq8rYVxzYHqSJmyzE2EjoSnuOFGj1tmBoT47FtCVAZaLgWsUTcsR0QReq1dQfQ8f0CxwcPWXsPAVcAI9Mwjg1RW62GtxN2u7h+b7B8kGpaYsEUGraIgGcmjbgAEpNW4lRtZqKf/0tpxpeTRl7T1JTrsvJasrFAbKaciVAVlMuEpLVlHMMSWq6+x54CzAAoSRGsMAooooAAAAASUVORK5CYII=);
+        }
+        .image-button {
+            background-color: transparent;
+            border: none;
+            width: 32px;
+            height: 32px;
+        }
+        .image-button:hover {
+            border: none;
+        }
+        .user-label {
+            pointer-events:all;
+            font: 9px 'Segoe UI';
+            cursor: pointer;
+            color: #FFFFFF;
+        }
+        .userList-inner {
+            display: table-row;
+            overflow: hidden;
+        }
+
+        .li-text {
+            display: table-cell;
+            vertical-align: middle;
+        }
+        .selectedUser {
+            background-color: rgba(96, 96, 96, 0.67);
+        }
+        .progress-label {
+            margin-bottom: 8px;
+        }
+       
+        #progress button {
+            height: 16px;
+            font: 9px 'Segoe UI';
+            padding-top: 1px;
+        }
+        #zoom-buttons {
+            position: absolute;
+            right: 8px;
+            top: 0px;
+        }
+        .selectedtoggle {
+            background-color:#60a0cf;
+        }
+        .statusBox {
+            transition: opacity 0.3s;
+            background-color: white;
+            width: 350px;
+          
+            text-align: left;
+            min-width: 120px;
+            max-width: 250px;
+            padding: 2px;
+            font: 9px 'Segoe UI';
+            background: #ffffff;
+            background-position: left bottom;
+            background-repeat: repeat-x;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            border: 1px solid #989898;
+            min-height: 40px;
+            background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAYAAAAfCAIAAABLdytMAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAAYdEVYdFNvZnR3YXJlAHBhaW50Lm5ldCA0LjAuNWWFMmUAAABHSURBVChT7ci7FYAgFATR6b/YBygoKn4ik11L8J6Jhtv86/W1LsNpGIbDsBu23iVWw9KaRKtVYjZMpUiUnCVyShIpQiJExAPmtCIfQ0TNmQAAAABJRU5ErkJggg==);
+        }
+    </style>
+
+</head>
+<body class="sparkle-xrm">
+  
+    <svg id="networksvg" width="100%" height="1000">
+        <defs>
+            <marker id="arrow2" viewBox="0 0 10 10" refX="20" refY="5" markerUnits="strokeWidth" markerWidth="9" markerHeight="5" orient="auto">
+                <path d="M 0 0 L 10 5 L 0 10 z" fill="#BBBBBB"  stroke-linecap="butt" stroke-width="1px"></path>
+            </marker>
+           
+            <filter id="blur1" x="-200%" y="-200%" width="400%" height="400%">
+                
+                <feColorMatrix type="matrix" values="0 0 0 0   0
+                 0 0 0 0   0
+                 0 0 0 0   0
+                 1 1 1 0.5 0" />
+                <feGaussianBlur stdDeviation="4" result="coloredBlur" />
+               
+                <feMerge>
+                    
+                    <feMergeNode in="coloredBlur" />
+                    <feMergeNode in="SourceGraphic" />
+                </feMerge>
+               
+            </filter>
+            <filter id="blur2" x="0" y="0">
+                <feGaussianBlur in="SourceGraphic" stdDeviation="0.5" />
+            </filter>
+            <filter id="no-glow">
+                <feColorMatrix type="matrix" values="1.0 0.0 0.0 0.0 0
+                                                          0.0 1 0 0.0 0
+                                                          0.0 0.0 1.0 0.0 0
+                                                          0.0 0.0 0.0 1.0 0"/>
+            </filter>
+            <filter id="root-node-glow">
+                     <feColorMatrix type="matrix" values="0.0 0.0 0.0 0.0 0
+                                                          0.0 0.5 0 0.0 0
+                                                          0.0 0.0 0.0 0.0 0
+                                                          0.0 0.0 0.0 1.0 0"/>
+            </filter>
+
+             <filter id="selected-glow">
+                     <feColorMatrix type="matrix" values="0.9 0.0 0.0 0.0 0
+                                                          0.3 0.0 1 0.0 0
+                                                          0.0 0.0 0.0 0.0 0
+                                                          0.0 0.0 0.0 1.0 0"/>
+            </filter>
+            <radialGradient id="Gradient1">
+                <stop offset="0%" stop-color="#33476A" />
+                <stop offset="100%" stop-color="#1C2E4C" />
+            </radialGradient>
+            <filter id="dropShadow" x="0" y="0" width="200%" height="200%">
+                <feOffset result="offOut" in="SourceGraphic" dx="5" dy="5" />
+                <feGaussianBlur result="blurOut" in="offOut" stdDeviation="10" />
+                <feBlend in="SourceGraphic" in2="blurOut" mode="normal" />
+            </filter>
+        </defs>
+        <rect id="bgFill" x="0" y="0" rx="0" ry="0" width="100%" height="100%" fill="url(#Gradient1)" />
+
+   
+    </svg>
+     <ul id='userList' style="display:none" data-bind='visible:true'>
+     <li id="progress" class="statusBox" data-bind="fadeVisible: isBusy"> 
+         <table height="100%" width="100%"> 
+             <tr> 
+                 <td align="center" valign="middle"> 
+                     <div class="progress-label" data-bind="text: isBusyMessage"></div> 
+                      <button type="button" title="Cancel" text="Cancel" data-bind="click: CancelCommand">Cancel</button>
+                      <button type="button" title="Load More" text="Load More" data-bind="click: LoadMoreCommand,visible: LoadIsPaused">Load More</button>
+                  </td> 
+             </tr> 
+         </table> 
+     </li> 
+      
+         <!-- ko template: {foreach: UsersAndTeams } -->
+        <li data-bind=" click: function () { $parent.UserClickCommand($parent, $data); }">
+            <div class="userlist-inner" data-bind="css: { selectedUser: id === $parent.SelectedUserId() }" }>
+            <div class="image-party li-img" data-bind="css: {'image-user32': !isTeam,'image-team32': isTeam}"></div>
+            <div class="user-label li-text" data-bind='text: fullname'> </div>
+                </div>
+        </li>
+         <!-- /ko -->
+        
+
+    </ul>
+    <ul id='connectionList' style="display:none" data-bind='visible: true'>
+        
+          <!-- ko template: {foreach: ConnectionRoles } -->
+        <li data-bind=" click: function () { $parent.ConnectionRoleClickCommand($parent, $data); }">
+            <div class="userlist-inner" data-bind="css: { selectedUser: $parent.SelectedConnectionRoles().contains($data) }" }>
+            <div class="image-party li-img image-connection" ></div>
+            <div class="user-label li-text" data-bind='text: $data'> </div>
+                </div>
+        </li>
+         <!-- /ko -->
+     </ul>
+    
+    
+    <div id='infoBox' class='infoBox' style='opacity:0;' ">
+          <div data-bind="click: CloseInfoBoxCommand" id="button-close" class=" button-closeImage"></div>
+         <span data-bind='text: SelectedNode().name'></span>
+        <table style="table-layout: fixed; direction: ltr; min-height:20px" cellspacing="0" cellpadding="3" valign="top" data-bind="with:SelectedNode()">
+            <colgroup>
+                <col width="50">
+                <col>
+            <tbody data-bind="foreach: $data.GetQuickViewForm($root)">
+                <tr min-height="25">
+                    <td title="" data-bind='text: label' style="text-align:right"></td>
+                    <td data-height="25" data-bind='text: value' style="text-overflow:ellipsis;white-space: nowrap;"></td>
+                </tr>
+                
+                
+            </tbody>
+
+        </table>
+        <div class="infoboxButtons">
+       
+            <div data-bind="click: DrillIntoCommand" id="button-openrecord" class="button button-openrecord"></div>
+           
+        </div>
+
+    </div>
+   
+     
+   
+    <div id="zoom-buttons">
+         <button type="button" class="image-button image-refresh32" title="Demo Mode" data-bind="click: DemoModeClickCommand, css: { selectedtoggle: $root.DemoMode() }"  ></button>
+         <button type="button" class="image-button image-minus32" title="Zoom Out" data-bind="click: ZoomOutCommand"></button>
+         <button type="button" class="image-button image-plus32" title="Zoom In" data-bind="click: ZoomInCommand"></button>
+     </div>
+       
+    <script>
+        window.APPLICATION_VERSION = '6.0';
+    </script>
+    <!-- Sparkle Xrm dependancies -->
+    <script src="../../sparkle_/js/SparkleXrmUI_Dependancies.js"></script>
+    <!-- Sparkle Xrm -->
+    <script src="../../sparkle_/js/mscorlib.js" type="text/javascript"></script>
+    <script src="../../sparkle_/js/SparkleXrm.js" type="text/javascript"></script>
+    <script src="../../sparkle_/js/SparkleXrmUI.js" type="text/javascript"></script>
+
+
+    <!-- Client Code -->
+    <script src="../js/d3.v3.min.js" type="text/javascript"></script>
+
+    <script src="../js/NetworkViewClient.js" type="text/javascript"></script>
+    <script src="../../ClientGlobalContext.js.aspx" type="text/javascript"></script>
+    <script type="text/javascript">
+
+       ClientUI.Views.NetworkView.Init();
+
+    </script>
+</body>
+</html>
