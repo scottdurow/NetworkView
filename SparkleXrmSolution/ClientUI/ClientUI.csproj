@@ -54,8 +54,6 @@
     <Compile Include="ViewModels\QueuedLoad.cs" />
     <Compile Include="ViewModels\XrmForm.cs" />
     <Compile Include="Views\NetworkView.cs" />
-    <None Include="Copy of SparkleXrm_5_2_8_managed.zip" />
-    <None Include="Copy of SparkleXRM_7_2_8_managed.zip" />
     <None Include="packages.config" />
     <None Include="Properties\FxCop.ruleset" />
     <None Include="Properties\Script.template" />
