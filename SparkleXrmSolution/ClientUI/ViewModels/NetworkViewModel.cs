@@ -94,6 +94,7 @@ namespace ClientUI.ViewModels
             HighlightedEntities = Knockout.ObservableArray<EntityReference>();
             SelectedUserId = Knockout.Observable<string>();
             RootEntityId = id;
+            RootEntityId.Value = NormalisedGuid(RootEntityId.Value);
             RootEntityLogicalName = logicalName;
             Config = config;
             GetDefaultConfig();
@@ -874,7 +875,7 @@ namespace ClientUI.ViewModels
                 ids.Add(record.Id);
                 string name = record.GetAttributeValueString(load.Entity.NameAttribute == null ? "name" : load.Entity.NameAttribute);
                 // If this is the root entity then set the window title
-                bool rootNode = (RootEntityId.Value.ToLowerCase().Substr(1, 36) == record.Id.ToLowerCase());
+                bool rootNode = RootEntityId.Value == record.Id.ToLowerCase();
 
                 if (rootNode)
                 {
@@ -978,7 +979,14 @@ namespace ClientUI.ViewModels
             CallNextProcessQueue();
 
         }
+        private string NormalisedGuid(string guid)
+        {
+            if (guid.Substr(0, 1) == "{")
+                guid = guid.Substr(1,36);
 
+            return guid.ToLowerCase();
+
+        }
         private string GetValues(string logicalName, string attribute, string op, List<string> ids)
         {
             string values = "<filter type='or'>";

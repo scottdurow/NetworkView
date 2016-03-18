@@ -40,7 +40,7 @@
     </DocumentationFile>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="Ribbon\AccountRibbon.cs" />
+    <Compile Include="Ribbon\RibbonCommands.cs" />
     <None Include="packages.config" />
     <None Include="Properties\FxCop.ruleset" />
     <None Include="Properties\Script.template" />
