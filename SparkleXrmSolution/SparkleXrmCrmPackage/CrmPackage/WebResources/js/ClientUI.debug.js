@@ -167,7 +167,6 @@ ClientUI.ViewModels.NetworkViewModel = function ClientUI_ViewModels_NetworkViewM
     this.rootEntityId.value = this._normalisedGuid$1(this.rootEntityId.value);
     this.rootEntityLogicalName = logicalName;
     this.config = config;
-    this._getDefaultConfig$1();
     if (typeof(this.config) === 'undefined') {
         this.cancelRequested = true;
         window.setTimeout(ss.Delegate.create(this, function() {
@@ -277,9 +276,6 @@ ClientUI.ViewModels.NetworkViewModel.prototype = {
     
     __onZoom$1: null,
     
-    _getDefaultConfig$1: function ClientUI_ViewModels_NetworkViewModel$_getDefaultConfig$1() {
-    },
-    
     CancelCommand: function ClientUI_ViewModels_NetworkViewModel$CancelCommand() {
         this.cancelRequested = true;
         this.isBusy(false);
@@ -385,7 +381,7 @@ ClientUI.ViewModels.NetworkViewModel.prototype = {
                 var key = this._getIdIndexKeyEntityRef$1(party);
                 if (Object.keyExists(this.idIndex, key) && this.idIndex[key].replacedByOverflow != null) {
                     var overflow = this.idIndex[this._getIdIndexKeyEntityRef$1(party)].replacedByOverflow.sourceData;
-                    this.highlightedEntities.push(new Xrm.Sdk.EntityReference(new Xrm.Sdk.Guid(overflow.id), overflow.logicalName, null));
+                    this.highlightedEntities.push(new SparkleXrm.Sdk.EntityReference(new SparkleXrm.Sdk.Guid(overflow.id), overflow.logicalName, null));
                 }
                 else {
                     this.highlightedEntities.push(party);
@@ -544,14 +540,14 @@ ClientUI.ViewModels.NetworkViewModel.prototype = {
                 var $enum3 = ss.IEnumerator.getEnumerator(this._currentLoad.ids);
                 while ($enum3.moveNext()) {
                     var id = $enum3.current;
-                    var record = this.idIndex[this._getIdIndexKeyEntityRef$1(new Xrm.Sdk.EntityReference(new Xrm.Sdk.Guid(id), this._currentLoad.join.leftEntity, null))];
+                    var record = this.idIndex[this._getIdIndexKeyEntityRef$1(new SparkleXrm.Sdk.EntityReference(new SparkleXrm.Sdk.Guid(id), this._currentLoad.join.leftEntity, null))];
                     if (record != null) {
                         var idValue = (record.sourceData).getAttributeValue(this._currentLoad.join.leftAttribute);
                         if (idValue != null) {
-                            if (Type.getInstanceType(idValue) === Xrm.Sdk.Guid) {
+                            if (Type.getInstanceType(idValue) === SparkleXrm.Sdk.Guid) {
                                 joinIds.add((idValue).value);
                             }
-                            else if (Type.getInstanceType(idValue) === Xrm.Sdk.EntityReference) {
+                            else if (Type.getInstanceType(idValue) === SparkleXrm.Sdk.EntityReference) {
                                 joinIds.add((idValue).id.value);
                             }
                         }
@@ -683,10 +679,10 @@ ClientUI.ViewModels.NetworkViewModel.prototype = {
     _getParentEntity$1: function ClientUI_ViewModels_NetworkViewModel$_getParentEntity$1(record, parentAttributeName, parentEnityLogicalName) {
         var parent = record.getAttributeValue(parentAttributeName);
         var parentid = '';
-        if (Type.getInstanceType(parent) === Xrm.Sdk.Guid) {
+        if (Type.getInstanceType(parent) === SparkleXrm.Sdk.Guid) {
             parentid = (parent).value;
         }
-        else if (Type.getInstanceType(parent) === Xrm.Sdk.EntityReference) {
+        else if (Type.getInstanceType(parent) === SparkleXrm.Sdk.EntityReference) {
             parentid = (parent).id.value;
             parentEnityLogicalName = (parent).logicalName;
         }
@@ -702,9 +698,9 @@ ClientUI.ViewModels.NetworkViewModel.prototype = {
     
     _loadFetchXml$1: function ClientUI_ViewModels_NetworkViewModel$_loadFetchXml$1(load, rootQuery) {
         this._setMessage$1(ClientUI.ResourceStrings.querying, load.entity.displayName, 0, 0);
-        Xrm.Sdk.OrganizationServiceProxy.beginRetrieveMultiple(rootQuery, ss.Delegate.create(this, function(state) {
+        SparkleXrm.Sdk.OrganizationServiceProxy.beginRetrieveMultiple(rootQuery, ss.Delegate.create(this, function(state) {
             try {
-                var rootResults = Xrm.Sdk.OrganizationServiceProxy.endRetrieveMultiple(state, Xrm.Sdk.Entity);
+                var rootResults = SparkleXrm.Sdk.OrganizationServiceProxy.endRetrieveMultiple(state, SparkleXrm.Sdk.Entity);
                 this._trace$1('Query for {0} returned {1} records', [ load.entity.logicalName, rootResults.get_entities().get_count() ]);
                 this._processQueryResults$1(load, rootResults);
             }
@@ -843,21 +839,21 @@ ClientUI.ViewModels.NetworkViewModel.prototype = {
         Object.clearKeys(this.idIndexActivityLoad);
         if (!!parties) {
             var fetchXml = String.format(this.config.acitvityFetchXml, parties);
-            Xrm.Sdk.OrganizationServiceProxy.beginRetrieveMultiple(fetchXml, ss.Delegate.create(this, function(state2) {
+            SparkleXrm.Sdk.OrganizationServiceProxy.beginRetrieveMultiple(fetchXml, ss.Delegate.create(this, function(state2) {
                 if (this._isCancelRequested$1()) {
                     return;
                 }
                 var rootResults2;
                 var total = 0;
                 try {
-                    rootResults2 = Xrm.Sdk.OrganizationServiceProxy.endRetrieveMultiple(state2, Xrm.Sdk.Entity);
+                    rootResults2 = SparkleXrm.Sdk.OrganizationServiceProxy.endRetrieveMultiple(state2, SparkleXrm.Sdk.Entity);
                     total = rootResults2.get_entities().get_count();
                 }
                 catch (ex) {
                     this._reportError$1(ex);
                     return;
                 }
-                Xrm.DelegateItterator.callbackItterate(ss.Delegate.create(this, function(index, nextCallBack, errorCallBack) {
+                SparkleXrm.DelegateItterator.callbackItterate(ss.Delegate.create(this, function(index, nextCallBack, errorCallBack) {
                     if (this._isCancelRequested$1()) {
                         return;
                     }
@@ -944,7 +940,7 @@ ClientUI.ViewModels.NetworkViewModel.prototype = {
                             overflowNode.parentNode = newNode.parentNode;
                             overflowNode.x = this._startX$1;
                             overflowNode.y = this._startY$1;
-                            var overflowEntity = new Xrm.Sdk.Entity('overflow');
+                            var overflowEntity = new SparkleXrm.Sdk.Entity('overflow');
                             overflowEntity.id = 'overflow' + (newNode.sourceData).id;
                             overflowNode.sourceData = overflowEntity;
                             this.nodes.add(overflowNode);
@@ -1005,21 +1001,21 @@ ClientUI.ViewModels.NetworkViewModel.prototype = {
         Object.clearKeys(this.idIndexConnectionLoad);
         if (!!values) {
             var fetchXml = String.format(this.config.connectionFetchXml, values);
-            Xrm.Sdk.OrganizationServiceProxy.beginRetrieveMultiple(fetchXml, ss.Delegate.create(this, function(state2) {
+            SparkleXrm.Sdk.OrganizationServiceProxy.beginRetrieveMultiple(fetchXml, ss.Delegate.create(this, function(state2) {
                 if (this._isCancelRequested$1()) {
                     return;
                 }
                 var rootResults2 = null;
                 var total = 0;
                 try {
-                    rootResults2 = Xrm.Sdk.OrganizationServiceProxy.endRetrieveMultiple(state2, ClientUI.ViewModels.Connection);
+                    rootResults2 = SparkleXrm.Sdk.OrganizationServiceProxy.endRetrieveMultiple(state2, ClientUI.ViewModels.Connection);
                     total = rootResults2.get_entities().get_count();
                 }
                 catch (ex) {
                     this._reportError$1(ex);
                     return;
                 }
-                Xrm.DelegateItterator.callbackItterate(ss.Delegate.create(this, function(index, nextCallBack, errorCallBack) {
+                SparkleXrm.DelegateItterator.callbackItterate(ss.Delegate.create(this, function(index, nextCallBack, errorCallBack) {
                     if (this._isCancelRequested$1()) {
                         return;
                     }
@@ -1091,7 +1087,7 @@ ClientUI.ViewModels.NetworkViewModel.prototype = {
     },
     
     _isAlsoAUserFromEntityReference$1: function ClientUI_ViewModels_NetworkViewModel$_isAlsoAUserFromEntityReference$1(record) {
-        var entityRecord = new Xrm.Sdk.Entity(record.logicalName);
+        var entityRecord = new SparkleXrm.Sdk.Entity(record.logicalName);
         entityRecord.id = record.id.value;
         return this._isAlsoAUser$1(entityRecord);
     },
@@ -1159,11 +1155,11 @@ ClientUI.ViewModels.NetworkViewModel.prototype = {
         var userQuery = String.format("<fetch version='1.0' output-format='xml-platform' mapping='logical' distinct='false' nolock='true'>\r\n                              <entity name='systemuser'>\r\n                                <attribute name='fullname' />\r\n                                <attribute name='systemuserid' />\r\n                                <attribute name='internalemailaddress'/>\r\n                                <filter type='and'>\r\n                                  <condition attribute='systemuserid' operator='in' >{0}</condition>\r\n                                </filter>\r\n                              </entity>\r\n                            </fetch>", useridValues);
         var teamQuery = String.format("<fetch version='1.0' output-format='xml-platform' mapping='logical' distinct='false' nolock='true'>\r\n                              <entity name='team'>\r\n                                <attribute name='name' />\r\n                                <attribute name='teamid' />\r\n                                <filter type='and'>\r\n                                  <condition attribute='teamid' operator='in' >{0}</condition>\r\n                                </filter>\r\n                              </entity>\r\n                            </fetch>", teamidValues);
         if (useridValues.length > 0) {
-            Xrm.Sdk.OrganizationServiceProxy.beginRetrieveMultiple(userQuery, ss.Delegate.create(this, function(state) {
+            SparkleXrm.Sdk.OrganizationServiceProxy.beginRetrieveMultiple(userQuery, ss.Delegate.create(this, function(state) {
                 if (this._isCancelRequested$1()) {
                     return;
                 }
-                var users = Xrm.Sdk.OrganizationServiceProxy.endRetrieveMultiple(state, ClientUI.ViewModels.UserOrTeam);
+                var users = SparkleXrm.Sdk.OrganizationServiceProxy.endRetrieveMultiple(state, ClientUI.ViewModels.UserOrTeam);
                 var $enum1 = ss.IEnumerator.getEnumerator(users.get_entities());
                 while ($enum1.moveNext()) {
                     var user = $enum1.current;
@@ -1187,11 +1183,11 @@ ClientUI.ViewModels.NetworkViewModel.prototype = {
             }));
         }
         if (teamidValues.length > 0) {
-            Xrm.Sdk.OrganizationServiceProxy.beginRetrieveMultiple(teamQuery, ss.Delegate.create(this, function(state) {
+            SparkleXrm.Sdk.OrganizationServiceProxy.beginRetrieveMultiple(teamQuery, ss.Delegate.create(this, function(state) {
                 if (this._isCancelRequested$1()) {
                     return;
                 }
-                var teams = Xrm.Sdk.OrganizationServiceProxy.endRetrieveMultiple(state, ClientUI.ViewModels.UserOrTeam);
+                var teams = SparkleXrm.Sdk.OrganizationServiceProxy.endRetrieveMultiple(state, ClientUI.ViewModels.UserOrTeam);
                 var $enum1 = ss.IEnumerator.getEnumerator(teams.get_entities());
                 while ($enum1.moveNext()) {
                     var team = $enum1.current;
@@ -1583,7 +1579,7 @@ ClientUI.Views.NetworkView.Init = function ClientUI_Views_NetworkView$Init() {
         if (!Object.keyExists(data, 'etn')) {
             data['etn'] = 'account';
         }
-        var vm = new ClientUI.ViewModels.NetworkViewModel(new Xrm.Sdk.Guid(data['id']), data['etn'], window.GraphOptions);
+        var vm = new ClientUI.ViewModels.NetworkViewModel(new SparkleXrm.Sdk.Guid(data['id']), data['etn'], window.GraphOptions);
         ClientUI.Views.NetworkView.view = new ClientUI.Views.NetworkView(vm);
     });
 }
@@ -2069,9 +2065,9 @@ ClientUI.ViewModels.EntityNode.registerClass('ClientUI.ViewModels.EntityNode');
 ClientUI.ViewModels.FormCell.registerClass('ClientUI.ViewModels.FormCell');
 ClientUI.ViewModels.NetworkViewModel.registerClass('ClientUI.ViewModels.NetworkViewModel', SparkleXrm.ViewModelBase);
 ClientUI.ViewModels.PendingLink.registerClass('ClientUI.ViewModels.PendingLink');
-ClientUI.ViewModels.UserOrTeam.registerClass('ClientUI.ViewModels.UserOrTeam', Xrm.Sdk.Entity);
-ClientUI.ViewModels.ActivityParty.registerClass('ClientUI.ViewModels.ActivityParty', Xrm.Sdk.Entity);
-ClientUI.ViewModels.Connection.registerClass('ClientUI.ViewModels.Connection', Xrm.Sdk.Entity);
+ClientUI.ViewModels.UserOrTeam.registerClass('ClientUI.ViewModels.UserOrTeam', SparkleXrm.Sdk.Entity);
+ClientUI.ViewModels.ActivityParty.registerClass('ClientUI.ViewModels.ActivityParty', SparkleXrm.Sdk.Entity);
+ClientUI.ViewModels.Connection.registerClass('ClientUI.ViewModels.Connection', SparkleXrm.Sdk.Entity);
 ClientUI.ViewModels.QueuedLoad.registerClass('ClientUI.ViewModels.QueuedLoad');
 ClientUI.ViewModels.XrmForm.registerClass('ClientUI.ViewModels.XrmForm');
 ClientUI.Views.NetworkView.registerClass('ClientUI.Views.NetworkView');

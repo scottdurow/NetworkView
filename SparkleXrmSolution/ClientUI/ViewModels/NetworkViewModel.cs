@@ -97,7 +97,7 @@ namespace ClientUI.ViewModels
             RootEntityId.Value = NormalisedGuid(RootEntityId.Value);
             RootEntityLogicalName = logicalName;
             Config = config;
-            GetDefaultConfig();
+           
 
             if (Type.GetScriptType(Config) == "undefined")
             {
@@ -131,139 +131,7 @@ namespace ClientUI.ViewModels
             DemoTick();
         }
 
-        private void GetDefaultConfig()
-        {
-
-            //            // Add the default config
-            //            Config = new NetworkViewOptions();
-            //            Config.Trace = false;
-            //            Config.Entities = new Dictionary<string, EntitySetting>();
-            //            Config.ConnectionFetchXml = @"<fetch version='1.0' output-format='xml-platform' mapping='logical' distinct='false' nolock='true'>
-            //                          <entity name='connection'>
-            //                            <attribute name='record2id' />
-            //                            <attribute name='record2roleid' />
-            //                            <attribute name='connectionid' />
-            //                            <attribute name='record1roleid' />
-            //                            <attribute name='record1id' />
-            //                            <order attribute='record2id' descending='false' />
-            //                            <filter type='and'>
-            //                              <condition attribute='record1id' operator='in'>
-            //                                {0}
-            //                              </condition>
-            //                            </filter>
-            //                          </entity>
-            //                        </fetch>";
-            //            Config.AcitvityFetchXml = @"<fetch version='1.0' output-format='xml-platform' mapping='logical' distinct='true' no-lock='true' count='100'>
-            //                  <entity name='activitypointer'>
-            //                    <attribute name='activityid' />
-            //                    <attribute name='activitytypecode' />
-            //                    <attribute name='subject' alias='name'/>
-            //                    <attribute name='modifiedon'/>
-            //                    <attribute name='actualstart'/>
-            //                    <attribute name='actualend'/>
-            //                    <attribute name='statecode'/>
-            //                    <attribute name='regardingobjectid'/>      
-            //                    <attribute name='allparties' />
-            //                       <order attribute='modifiedon' descending='true' />
-            //                    <link-entity name='activityparty' from='activityid' to='activityid' alias='ab'>
-            //                      <filter type='and'>
-            //                        <condition attribute='partyid' operator='in'>
-            //                         {0}
-            //                        </condition>
-            //                      </filter>
-            //                    </link-entity>
-            //                  </entity>
-            //                </fetch>";
-            //            Config.QuickViewForms = new Dictionary<string, Dictionary<string, string>>();
-            //            EntitySetting account = new EntitySetting();
-            //            account.DisplayName = "Accounts";
-            //            account.LogicalName = "account";
-            //            account.NameAttribute = "name";
-            //            account.IdAttribute = "accountid";
-            //            account.ParentAttributeId = "parentaccountid";
-            //            account.LoadActivities = true;
-            //            account.LoadConnections = true;
-            //            account.Hierarchical = true;
-
-            //            account.FetchXml = @"<fetch version='1.0' output-format='xml-platform' mapping='logical' distinct='true' no-lock='true'>
-            //                  <entity name='account'>
-            //                    <attribute name='accountid'/>
-            //                    <attribute name='name' />
-            //                    <attribute name='telephone1'/>
-            //                    <attribute name='emailaddress1'/>
-            //                    <attribute name='ownerid'/> 
-            //                    <attribute name='parentaccountid'/>
-            //                    <order attribute='name' descending='false' />
-            //                      <filter type='and'>
-            //                        <condition attribute='statecode' operator='eq' value='0' />
-            //                       {0}
-            //                      </filter>
-            //                  </entity>
-            //                </fetch>";
-            //            JoinSetting accountContactJoin = new JoinSetting();
-            //            accountContactJoin.LeftEntity = "account";
-            //            accountContactJoin.RightEntity = "contact";
-            //            accountContactJoin.LeftAttribute = "accountid";
-            //            accountContactJoin.RightAttribute = "parentcustomerid";
-            //            accountContactJoin.Name = "Get Child Contacts";
-            //            account.Joins = new JoinSetting[] { accountContactJoin };
-
-            //            Config.Entities[account.LogicalName] = account;
-
-            //            EntitySetting contact = new EntitySetting();
-            //            contact.DisplayName = "Contacts";
-            //            contact.LogicalName = "contact";
-            //            contact.NameAttribute = "fullname";
-            //            contact.IdAttribute = "contactid";
-            //            contact.ParentAttributeId = "parentcustomerid";
-            //            contact.LoadActivities = true;
-            //            contact.LoadConnections = true;
-            //            contact.Hierarchical = false;
-
-
-
-            //            JoinSetting parentAccountJoin = new JoinSetting();
-            //            parentAccountJoin.LeftEntity = "contact";
-            //            parentAccountJoin.RightEntity = "account";
-            //            parentAccountJoin.LeftAttribute = "parentcustomerid";
-            //            parentAccountJoin.RightAttribute = "accountid";
-            //            parentAccountJoin.Name = "Get contact parent accounts";
-
-            //            contact.Joins = new JoinSetting[] { parentAccountJoin };
-
-            //            contact.FetchXml = @"<fetch version='1.0' output-format='xml-platform' mapping='logical' distinct='true' no-lock='true'>
-            //                  <entity name='contact'>
-            //                    <attribute name='contactid'/>
-            //                    <attribute name='fullname' />
-            //                    <attribute name='telephone1'/>
-            //                    <attribute name='emailaddress1'/>
-            //                    <attribute name='ownerid'/>
-            //                    <attribute name='parentcustomerid'/>
-            //                      <filter type='and'>
-            //                        <condition attribute='statecode' operator='eq' value='0' />                    
-            //                       {0}            
-            //                      </filter>
-            //                    <link-entity name='systemuser' from='internalemailaddress' to='emailaddress1' link-type='outer' >
-            //                                <attribute name='systemuserid' alias='systemuserid' />
-            //                     </link-entity>
-            //                  </entity>
-            //                </fetch>";
-
-
-            //            Config.Entities[contact.LogicalName] = contact;
-
-
-
-            //            // Set quick view forms
-            //            Config.QuickViewForms["account"] = new Dictionary<string, string>("address1_city", "City", "telephone1", "Tel");
-            //            Config.QuickViewForms["contact"] = new Dictionary<string, string>("emailaddress1", "Email", "telephone1", "Tel");
-            //            Config.QuickViewForms["letter"] = new Dictionary<string, string>("modifiedon", "Modified", "statecode", "Status", "actualedend", "Due","regardingobjectid","Regarding");
-            //            Config.QuickViewForms["email"] = new Dictionary<string, string>("modifiedon", "Modified", "statecode", "Status", "actualend", "Sent", "regardingobjectid", "Regarding");
-            //            Config.QuickViewForms["phonecall"] = new Dictionary<string, string>("modifiedon", "Modified", "statecode", "Status", "scheduledend", "Due");
-            //            Config.QuickViewForms["apppointment"] =new  Dictionary<string, string>("statecode", "Status", "scheduledstart", "Start", "scheduledend", "End", "regardingobjectid", "Regarding");
-            //            Config.QuickViewForms["task"] = new Dictionary<string, string>("modifiedon", "Modified", "statecode", "Status", "scheduledend", "Due");
-
-        }
+       
 
         #endregion
 

@@ -25,6 +25,18 @@ window.GraphOptions = {
                         rightEntity: "contact",
                         leftAttribute: "accountid",
                         rightAttribute: "parentcustomerid"
+                    },
+                    {
+                        leftEntity: "account",
+                        rightEntity: "opportunity",
+                        leftAttribute: "accountid",
+                        rightAttribute: "customerid"
+                    },
+                    {
+                        leftEntity: "account",
+                        rightEntity: "incident",
+                        leftAttribute: "accountid",
+                        rightAttribute: "customerid"
                     }
             ]
         },
@@ -45,8 +57,33 @@ window.GraphOptions = {
                         rightEntity: "account",
                         leftAttribute: "parentcustomerid",
                         rightAttribute: "accountid"
+                    },
+                    {
+                        leftEntity: "contact",
+                        rightEntity: "opportunity",
+                        leftAttribute: "contactid",
+                        rightAttribute: "customerid"
+                    },
+                    {
+                        leftEntity: "contact",
+                        rightEntity: "incident",
+                        leftAttribute: "contactid",
+                        rightAttribute: "customerid"
                     }
             ]
+        },
+       
+        opportunity: {
+            displayName: "Opportunity",
+            logicalName: "opportunity",
+            nameAttribute: "name",
+            idAttribute: "opportunityid",
+            parentAttributeId: "customerid",
+            loadActivities: true,
+            loadConnections: true,
+            hierarchical: false,
+            fetchXml: "<fetch version='1.0' output-format='xml-platform' mapping='logical' distinct='true' no-lock='true'>     <entity name='opportunity'>     <attribute name='opportunityid'/>  <attribute name='name' />   <attribute name='ownerid'/>    <attribute name='customerid'/>    <attribute name='modifiedon'/>      <filter type='and'>          {0}    </filter>         </entity>     </fetch>",
+            joins: []
         },
         incident: {
             displayName: "Case",
@@ -59,12 +96,13 @@ window.GraphOptions = {
             hierarchical: false,
             fetchXml: "<fetch version='1.0' output-format='xml-platform' mapping='logical' distinct='true' no-lock='true'>     <entity name='incident'>     <attribute name='incidentid'/>     <attribute name='ticketnumber' />  <attribute name='title' />   <attribute name='ownerid'/>    <attribute name='customerid'/>    <attribute name='modifiedon'/>     <filter type='and'>        <condition attribute='statecode' operator='eq' value='0' />    {0}    </filter>          </entity>     </fetch>",
             joins: []
-        },
+        }
     },
     quickViewForms: {
         account: { address1_city: 'City', telephone1: 'Tel' },
         contact: { emailaddress1: 'Email', telephone1: 'Tel' },
         incident: { ticketnumber: 'CaseId', title: 'Title' },
+        opportunity: { name: 'Subject', statecode: 'Status' },
         letter: { modifiedon: 'Modified', statecode: 'Status', actualedend: 'Due', regardingobjectid: 'Regarding' },
         email: { modifiedon: 'Modified', statecode: 'Status', actualend: 'Sent', regardingobjectid: 'Regarding' },
         phonecall: { modifiedon: 'Modified', statecode: 'Status', scheduledend: 'Due' },

@@ -105,6 +105,11 @@
       <UniqueName>dev1_/js/d3.v3.min.js</UniqueName>
       <WebResourceType>Script</WebResourceType>
     </CRMWebResource>
+    <CRMWebResource Include="WebResources\js\networkviz_smartbutton_manifest.js">
+      <DisplayName>dev1_/js/networkviz_smartbutton_manifest.js</DisplayName>
+      <UniqueName>dev1_/js/networkviz_smartbutton_manifest.js</UniqueName>
+      <WebResourceType>Script</WebResourceType>
+    </CRMWebResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\CRM\Microsoft.CrmDeveloperTools.12.targets" />
