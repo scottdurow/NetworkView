@@ -1,0 +1,104 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<RibbonDiffXml>
+  <CustomActions>
+    <CustomAction Id="dev1.account.NetworkViz.Button.CustomAction" Location="Mscrm.Form.account.MainTab.Save.Controls._children" Sequence="64">
+      <CommandUIDefinition>
+        <Button Command="dev1.account.NetworkViz.Command" Id="dev1.account.NetworkViz.Button" Image16by16="$webresource:dev1_/images/networkviz16.png" LabelText="$LocLabels:dev1.account.NetworkViz.Button.LabelText" Sequence="64" TemplateAlias="o1" ToolTipTitle="$LocLabels:dev1.account.NetworkViz.Button.ToolTipTitle" ToolTipDescription="$LocLabels:dev1.account.NetworkViz.Button.ToolTipDescription" />
+      </CommandUIDefinition>
+    </CustomAction>
+    <CustomAction Id="dev1.account.NetworkViz.HomeGridButton.Button.CustomAction" Location="Mscrm.HomepageGrid.account.MainTab.Collaborate.Controls._children" Sequence="47">
+      <CommandUIDefinition>
+        <Button Command="dev1.account.NetworkViz.Grid.Command" Id="dev1.account.NetworkViz.HomeGridButton.Button" Image16by16="$webresource:dev1_/images/networkviz16.png" LabelText="$LocLabels:dev1.account.NetworkViz.HomeGridButton.Button.LabelText" Sequence="47" TemplateAlias="o1" ToolTipTitle="$LocLabels:dev1.account.NetworkViz.HomeGridButton.Button.ToolTipTitle" ToolTipDescription="$LocLabels:dev1.account.NetworkViz.HomeGridButton.Button.ToolTipDescription" />
+      </CommandUIDefinition>
+    </CustomAction>
+    <CustomAction Id="dev1.account.NetworkViz.SubGridButton.CustomAction" Location="Mscrm.SubGrid.account.MainTab.Collaborate.Controls._children" Sequence="60">
+      <CommandUIDefinition>
+        <Button Command="dev1.account.NetworkViz.Grid.Command" Id="dev1.account.NetworkViz.SubGridButton" Image16by16="$webresource:dev1_/images/networkviz16.png" LabelText="$LocLabels:dev1.account.NetworkViz.SubGridButton.LabelText" Sequence="60" TemplateAlias="o3" ToolTipTitle="$LocLabels:dev1.account.NetworkViz.SubGridButton.ToolTipTitle" ToolTipDescription="$LocLabels:dev1.account.NetworkViz.SubGridButton.ToolTipDescription" />
+      </CommandUIDefinition>
+    </CustomAction>
+  </CustomActions>
+  <Templates>
+    <RibbonTemplates Id="Mscrm.Templates"></RibbonTemplates>
+  </Templates>
+  <CommandDefinitions>
+    <CommandDefinition Id="dev1.account.NetworkViz.Command">
+      <EnableRules />
+      <DisplayRules />
+      <Actions>
+        <JavaScriptFunction FunctionName="isNaN" Library="$webresource:sparkle_/js/mscorlib_crm.js" />
+        <JavaScriptFunction FunctionName="isNaN" Library="$webresource:sparkle_/js/SparkleXrm.js" />
+        <JavaScriptFunction FunctionName="NetworkView.ClientHooks.Ribbon.RibbonCommands.openNetworkViewFromForm" Library="$webresource:dev1_/js/NetworkViewClientHooks.js" />
+      </Actions>
+    </CommandDefinition>
+    <CommandDefinition Id="dev1.account.NetworkViz.Grid.Command">
+      <EnableRules>
+        <EnableRule Id="dev1.account.SingleItemSelected.EnableRule" />
+      </EnableRules>
+      <DisplayRules />
+      <Actions>
+        <JavaScriptFunction FunctionName="isNaN" Library="$webresource:sparkle_/js/mscorlib_crm.js" />
+        <JavaScriptFunction FunctionName="isNaN" Library="$webresource:sparkle_/js/SparkleXrm.js" />
+        <JavaScriptFunction FunctionName="NetworkView.ClientHooks.Ribbon.RibbonCommands.openNetworkView" Library="$webresource:dev1_/js/NetworkViewClientHooks.js">
+          <CrmParameter Value="FirstSelectedItemId" />
+          <CrmParameter Value="SelectedEntityTypeName" />
+        </JavaScriptFunction>
+      </Actions>
+    </CommandDefinition>
+  </CommandDefinitions>
+  <RuleDefinitions>
+    <TabDisplayRules />
+    <DisplayRules />
+    <EnableRules>
+      <EnableRule Id="dev1.account.SingleItemSelected.EnableRule">
+        <SelectionCountRule AppliesTo="SelectedEntity" Minimum="1" Maximum="1" Default="true" />
+      </EnableRule>
+    </EnableRules>
+  </RuleDefinitions>
+  <LocLabels>
+    <LocLabel Id="dev1.account.NetworkViz.Button.LabelText">
+      <Titles>
+        <Title description="Visualize" languagecode="1033" />
+      </Titles>
+    </LocLabel>
+    <LocLabel Id="dev1.account.NetworkViz.Button.ToolTipDescription">
+      <Titles>
+        <Title description="Visualize the relationships to other records" languagecode="1033" />
+      </Titles>
+    </LocLabel>
+    <LocLabel Id="dev1.account.NetworkViz.Button.ToolTipTitle">
+      <Titles>
+        <Title description="Visualize" languagecode="1033" />
+      </Titles>
+    </LocLabel>
+    <LocLabel Id="dev1.account.NetworkViz.HomeGridButton.Button.LabelText">
+      <Titles>
+        <Title description="Visualize" languagecode="1033" />
+      </Titles>
+    </LocLabel>
+    <LocLabel Id="dev1.account.NetworkViz.HomeGridButton.Button.ToolTipDescription">
+      <Titles>
+        <Title description="Visualize the relationships to other records" languagecode="1033" />
+      </Titles>
+    </LocLabel>
+    <LocLabel Id="dev1.account.NetworkViz.HomeGridButton.Button.ToolTipTitle">
+      <Titles>
+        <Title description="Visualize" languagecode="1033" />
+      </Titles>
+    </LocLabel>
+    <LocLabel Id="dev1.account.NetworkViz.SubGridButton.LabelText">
+      <Titles>
+        <Title description="Visualize" languagecode="1033" />
+      </Titles>
+    </LocLabel>
+    <LocLabel Id="dev1.account.NetworkViz.SubGridButton.ToolTipDescription">
+      <Titles>
+        <Title description="Visualize the relationships to other records" languagecode="1033" />
+      </Titles>
+    </LocLabel>
+    <LocLabel Id="dev1.account.NetworkViz.SubGridButton.ToolTipTitle">
+      <Titles>
+        <Title description="Visualize" languagecode="1033" />
+      </Titles>
+    </LocLabel>
+  </LocLabels>
+</RibbonDiffXml>

@@ -95,6 +95,7 @@ namespace ClientUI.ViewModels
             SelectedUserId = Knockout.Observable<string>();
             RootEntityId = id;
             RootEntityId.Value = NormalisedGuid(RootEntityId.Value);
+            
             RootEntityLogicalName = logicalName;
             Config = config;
            

@@ -22,7 +22,7 @@
     <SccProvider>SAK</SccProvider>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <OutputPath>..\SparkleXrmCrmPackage\CrmPackage\WebResources\js\</OutputPath>
+    <OutputPath>..\SparkleXrmCrmPackage\CrmPackage\dev1_\js\</OutputPath>
     <DefineConstants>DEBUG;CODE_ANALYSIS;SCRIPTSHARP</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>

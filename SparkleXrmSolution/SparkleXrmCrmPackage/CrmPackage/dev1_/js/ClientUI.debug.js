@@ -164,12 +164,7 @@ ClientUI.ViewModels.NetworkViewModel = function ClientUI_ViewModels_NetworkViewM
     this.highlightedEntities = ko.observableArray();
     this.SelectedUserId = ko.observable();
     this.rootEntityId = id;
-    if (ss.isNullOrUndefined(this.rootEntityId)) {
-        this.rootEntityId = new SparkleXrm.Sdk.Guid('6F456AE5-237A-E711-A953-000D3AB4A3E9');
-    }
-    else {
-        this.rootEntityId.value = this._normalisedGuid$1(this.rootEntityId.value);
-    }
+    this.rootEntityId.value = this._normalisedGuid$1(this.rootEntityId.value);
     this.rootEntityLogicalName = logicalName;
     this.config = config;
     if (typeof(this.config) === 'undefined') {
@@ -1584,7 +1579,11 @@ ClientUI.Views.NetworkView.Init = function ClientUI_Views_NetworkView$Init() {
         if (!Object.keyExists(data, 'etn')) {
             data['etn'] = 'account';
         }
-        var vm = new ClientUI.ViewModels.NetworkViewModel(new SparkleXrm.Sdk.Guid(data['id']), data['etn'], window.GraphOptions);
+        if (!Object.keyExists(data, 'id')) {
+            data['id'] = '6F456AE5-237A-E711-A953-000D3AB4A3E9';
+        }
+        var id = new SparkleXrm.Sdk.Guid(data['id']);
+        var vm = new ClientUI.ViewModels.NetworkViewModel(id, data['etn'], window.GraphOptions);
         ClientUI.Views.NetworkView.view = new ClientUI.Views.NetworkView(vm);
     });
 }

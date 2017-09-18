@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<WebResource>
+  <WebResourceId>{0fc3cdea-7b7a-e511-812d-080027846324}</WebResourceId>
+  <Name>dev1_/js/NetworkViewConfig_1033.js</Name>
+  <DisplayName>dev1_/js/NetworkViewConfig_1033.js</DisplayName>
+  <WebResourceType>3</WebResourceType>
+  <IntroducedVersion>1.0</IntroducedVersion>
+  <IsEnabledForMobileClient>0</IsEnabledForMobileClient>
+  <IsCustomizable>1</IsCustomizable>
+  <CanBeDeleted>1</CanBeDeleted>
+  <IsHidden>0</IsHidden>
+  <FileName>/WebResources/dev1_jsNetworkViewConfig_1033js0FC3CDEA-7B7A-E511-812D-080027846324</FileName>
+</WebResource>

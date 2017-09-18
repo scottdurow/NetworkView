@@ -71,8 +71,12 @@ namespace ClientUI.Views
                 // Webresource accepts the root id and entity type name (etn)
                 if (!data.ContainsKey("etn"))
                     data["etn"] = "account";
+                if (!data.ContainsKey("id"))
+                    data["id"] = "6F456AE5-237A-E711-A953-000D3AB4A3E9";
 
-                NetworkViewModel vm = new NetworkViewModel(new Guid(data["id"]), data["etn"], GlobalSettings.GraphOptions);
+                Guid id = new Guid(data["id"]);
+
+                NetworkViewModel vm = new NetworkViewModel(id, data["etn"], GlobalSettings.GraphOptions);
                 view = new NetworkView(vm);
             });
 
@@ -208,12 +212,12 @@ namespace ClientUI.Views
             Update();
             if (e == null)
             {
-                FastForward(force, 0.01, 100);
+                FastForward(force, (decimal)0.01, 100);
             }
             else
             {
                 force.Friction(0.01);
-                FastForward(force, 0.09, 100);
+                FastForward(force, (decimal)0.09, 100);
                 force.Friction(0.9);
                 Update();
 
@@ -303,7 +307,7 @@ namespace ClientUI.Views
                 }
                 return dataPairs;
             }
-            return null;
+            return new Dictionary<string, string>();
         }
 
         private static void HighlightLink(string key)
@@ -430,10 +434,10 @@ namespace ClientUI.Views
                         }
                     }
                 )
-                 .Attr<Func<EntityNode, string>>("x", delegate(EntityNode d) { return GetXY(d, 1.5); })
-                 .Attr<Func<EntityNode, string>>("y", delegate(EntityNode d) { return GetXY(d, 1.5); })
-                 .Attr<Func<EntityNode, string>>("width", delegate(EntityNode d) { return GetHeightWidth(d, 1.5); })
-                 .Attr<Func<EntityNode, string>>("height", delegate(EntityNode d) { return GetHeightWidth(d, 1.5); })
+                 .Attr<Func<EntityNode, string>>("x", delegate(EntityNode d) { return GetXY(d, (decimal)1.5); })
+                 .Attr<Func<EntityNode, string>>("y", delegate(EntityNode d) { return GetXY(d, (decimal)1.5); })
+                 .Attr<Func<EntityNode, string>>("width", delegate(EntityNode d) { return GetHeightWidth(d, (decimal)1.5); })
+                 .Attr<Func<EntityNode, string>>("height", delegate(EntityNode d) { return GetHeightWidth(d, (decimal)1.5); })
                  .Attr<Func<EntityNode, string>>("visibility", delegate(EntityNode d)
                     {
                         Entity entity = ((Entity)d.SourceData);
@@ -485,10 +489,10 @@ namespace ClientUI.Views
                             return "/_imgs/Navbar/ActionImgs/Documents_32.png";
                     }
                 })
-             .Attr<Func<EntityNode, string>>("x", delegate(EntityNode d) { return GetXY(d, 0.5); })
-             .Attr<Func<EntityNode, string>>("y", delegate(EntityNode d) { return GetXY(d, 0.5); })
-             .Attr<Func<EntityNode, string>>("width", delegate(EntityNode d) { return GetHeightWidth(d, 0.5); })
-             .Attr<Func<EntityNode, string>>("height", delegate(EntityNode d) { return GetHeightWidth(d, 0.5); })
+             .Attr<Func<EntityNode, string>>("x", delegate(EntityNode d) { return GetXY(d, (decimal)0.5); })
+             .Attr<Func<EntityNode, string>>("y", delegate(EntityNode d) { return GetXY(d, (decimal)0.5); })
+             .Attr<Func<EntityNode, string>>("width", delegate(EntityNode d) { return GetHeightWidth(d, (decimal)0.5); })
+             .Attr<Func<EntityNode, string>>("height", delegate(EntityNode d) { return GetHeightWidth(d, (decimal)0.5); })
              .Attr("filter", "url(#blur2)");
 
             node.Append("svg:text")

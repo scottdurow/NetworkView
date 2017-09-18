@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<WebResource>
+  <WebResourceId>{a4121bf8-e0de-e411-80d4-080027846324}</WebResourceId>
+  <Name>dev1_/js/NetworkViewClientHooks.js</Name>
+  <DisplayName>dev1_/js/NetworkViewClientHooks.js</DisplayName>
+  <WebResourceType>3</WebResourceType>
+  <IntroducedVersion>1.0</IntroducedVersion>
+  <IsEnabledForMobileClient>0</IsEnabledForMobileClient>
+  <IsCustomizable>0</IsCustomizable>
+  <CanBeDeleted>1</CanBeDeleted>
+  <IsHidden>0</IsHidden>
+  <FileName>/WebResources/dev1_jsNetworkViewClientHooksjsA4121BF8-E0DE-E411-80D4-080027846324</FileName>
+</WebResource>

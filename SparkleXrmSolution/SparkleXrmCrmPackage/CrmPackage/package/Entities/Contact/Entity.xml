@@ -1,0 +1,7 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Entity>
+  <Name LocalizedName="Contact" OriginalName="Contact">Contact</Name>
+  <ObjectTypeCode>2</ObjectTypeCode>
+  <FormXml />
+  <RibbonDiffXml />
+</Entity>

@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<WebResource>
+  <WebResourceId>{36d17033-a579-e511-812d-080027846324}</WebResourceId>
+  <Name>dev1_/images/overflow.png</Name>
+  <DisplayName>dev1_/images/overflow.png</DisplayName>
+  <WebResourceType>5</WebResourceType>
+  <IntroducedVersion>1.0</IntroducedVersion>
+  <IsEnabledForMobileClient>0</IsEnabledForMobileClient>
+  <IsCustomizable>0</IsCustomizable>
+  <CanBeDeleted>1</CanBeDeleted>
+  <IsHidden>0</IsHidden>
+  <FileName>/WebResources/dev1_imagesoverflowpng36D17033-A579-E511-812D-080027846324</FileName>
+</WebResource>

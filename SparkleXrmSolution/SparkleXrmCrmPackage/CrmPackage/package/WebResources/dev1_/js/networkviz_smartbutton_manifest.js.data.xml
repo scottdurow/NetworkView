@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<WebResource>
+  <WebResourceId>{50e30559-82e1-e611-81ca-080027846324}</WebResourceId>
+  <Name>dev1_/js/networkviz_smartbutton_manifest.js</Name>
+  <DisplayName>dev1_/js/networkviz_smartbutton_manifest.js</DisplayName>
+  <WebResourceType>3</WebResourceType>
+  <IntroducedVersion>1.0</IntroducedVersion>
+  <IsEnabledForMobileClient>0</IsEnabledForMobileClient>
+  <IsCustomizable>1</IsCustomizable>
+  <CanBeDeleted>1</CanBeDeleted>
+  <IsHidden>0</IsHidden>
+  <FileName>/WebResources/dev1_jsnetworkviz_smartbutton_manifestjs50E30559-82E1-E611-81CA-080027846324</FileName>
+</WebResource>

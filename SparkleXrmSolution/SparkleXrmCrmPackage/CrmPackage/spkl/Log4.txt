@@ -1,0 +1,82 @@
+12:56:14	Reading mapping directives...
+12:56:15	
+12:56:15	Packing C:\Repos\NetworkView\SparkleXrmSolution\SparkleXrmCrmPackage\CrmPackage\package to C:\Repos\NetworkView\SparkleXrmSolution\SparkleXrmCrmPackage\CrmPackage\spkl\..\NetworkView_1_2_0_0_managed.zip
+12:56:15	
+12:56:15	Processing Component: Entities
+12:56:15	 - Account
+12:56:15	Reading: C:\Repos\NetworkView\SparkleXrmSolution\SparkleXrmCrmPackage\CrmPackage\spkl\..\package\Entities\Account\Entity.xml
+13:00:38	Reading mapping directives...
+13:00:39	 - Account
+13:00:39	Reading: C:\Repos\NetworkView\SparkleXrmSolution\SparkleXrmCrmPackage\CrmPackage\spkl\..\package\Entities\Account\Entity.xml
+13:00:39	Reading: C:\Repos\NetworkView\SparkleXrmSolution\SparkleXrmCrmPackage\CrmPackage\spkl\..\package\Entities\Account\RibbonDiff.xml
+13:00:39	 - Contact
+13:00:39	Reading: C:\Repos\NetworkView\SparkleXrmSolution\SparkleXrmCrmPackage\CrmPackage\spkl\..\package\Entities\Contact\Entity.xml
+13:00:39	Reading: C:\Repos\NetworkView\SparkleXrmSolution\SparkleXrmCrmPackage\CrmPackage\spkl\..\package\Entities\Contact\RibbonDiff.xml
+13:00:39	Processing Component: Roles
+13:00:39	Processing Component: Workflows
+13:00:39	Processing Component: FieldSecurityProfiles
+13:00:39	Processing Component: Templates
+13:00:39	Processing Component: EntityMaps
+13:00:39	Processing Component: EntityRelationships
+13:02:30	Reading mapping directives...
+13:02:31	
+13:02:31	Packing C:\Repos\NetworkView\SparkleXrmSolution\SparkleXrmCrmPackage\CrmPackage\package to C:\Repos\NetworkView\SparkleXrmSolution\SparkleXrmCrmPackage\CrmPackage\spkl\..\NetworkView_1_2_0_0_managed.zip
+13:02:31	
+13:02:31	Processing Component: Roles
+13:02:31	Processing Component: Workflows
+13:02:31	Processing Component: FieldSecurityProfiles
+13:02:31	Processing Component: Templates
+13:02:31	Processing Component: EntityMaps
+13:02:31	Processing Component: EntityRelationships
+13:02:31	Reading: C:\Repos\NetworkView\SparkleXrmSolution\SparkleXrmCrmPackage\CrmPackage\spkl\..\package\Other\Relationships.xml
+13:02:31	Reading: C:\Repos\NetworkView\SparkleXrmSolution\SparkleXrmCrmPackage\CrmPackage\spkl\..\package\Other\Relationships\Account.xml
+13:02:31	Reading: C:\Repos\NetworkView\SparkleXrmSolution\SparkleXrmCrmPackage\CrmPackage\spkl\..\package\Other\Relationships\Contact.xml
+13:02:31	Processing Component: optionsets
+13:02:31	Processing Component: WebResources
+13:02:31	Reading: C:\Repos\NetworkView\SparkleXrmSolution\SparkleXrmCrmPackage\CrmPackage\spkl\..\package\WebResources\dev1_\html\NetworkView.htm.data.xml
+13:02:31	Reading: C:\Repos\NetworkView\SparkleXrmSolution\SparkleXrmCrmPackage\CrmPackage\spkl\..\package\WebResources\dev1_\images\account.png.data.xml
+13:02:31	Reading: C:\Repos\NetworkView\SparkleXrmSolution\SparkleXrmCrmPackage\CrmPackage\spkl\..\package\WebResources\dev1_\images\contact.png.data.xml
+13:02:31	Reading: C:\Repos\NetworkView\SparkleXrmSolution\SparkleXrmCrmPackage\CrmPackage\spkl\..\package\WebResources\dev1_\images\image0.png.data.xml
+13:02:31	Reading: C:\Repos\NetworkView\SparkleXrmSolution\SparkleXrmCrmPackage\CrmPackage\spkl\..\package\WebResources\dev1_\images\Network.png.data.xml
+13:02:31	Reading: C:\Repos\NetworkView\SparkleXrmSolution\SparkleXrmCrmPackage\CrmPackage\spkl\..\package\WebResources\dev1_\images\networkviz16.png.data.xml
+13:02:31	Reading: C:\Repos\NetworkView\SparkleXrmSolution\SparkleXrmCrmPackage\CrmPackage\spkl\..\package\WebResources\dev1_\images\overflow.png.data.xml
+13:02:31	Reading: C:\Repos\NetworkView\SparkleXrmSolution\SparkleXrmCrmPackage\CrmPackage\spkl\..\package\WebResources\dev1_\js\d3.v3.min.js.data.xml
+13:02:31	Reading: C:\Repos\NetworkView\SparkleXrmSolution\SparkleXrmCrmPackage\CrmPackage\spkl\..\package\WebResources\dev1_\js\NetworkViewClient.js.data.xml
+13:05:54	Reading mapping directives...
+13:05:55	Reading: C:\Repos\NetworkView\SparkleXrmSolution\SparkleXrmCrmPackage\CrmPackage\dev1_\images\Network.png
+13:05:55	 - dev1_/images/networkviz16.png
+13:05:55	Mapping: C:\Repos\NetworkView\SparkleXrmSolution\SparkleXrmCrmPackage\CrmPackage\package\WebResources\dev1_\images\networkviz16.png to C:\Repos\NetworkView\SparkleXrmSolution\SparkleXrmCrmPackage\CrmPackage\dev1_\images\networkviz16.png
+13:05:55	Reading: C:\Repos\NetworkView\SparkleXrmSolution\SparkleXrmCrmPackage\CrmPackage\dev1_\images\networkviz16.png
+13:05:55	 - dev1_/images/overflow.png
+14:35:54	Reading mapping directives...
+14:35:54	
+14:35:54	Packing C:\Repos\NetworkView\SparkleXrmSolution\SparkleXrmCrmPackage\CrmPackage\package to C:\Repos\NetworkView\SparkleXrmSolution\SparkleXrmCrmPackage\CrmPackage\spkl\..\NetworkView_1_2_0_0_managed.zip
+14:35:54	
+17:24:17	Reading mapping directives...
+17:24:18	Reading: C:\Repos\NetworkView\SparkleXrmSolution\SparkleXrmCrmPackage\CrmPackage\spkl\..\package\WebResources\dev1_\images\contact.png.data.xml
+17:24:18	Reading: C:\Repos\NetworkView\SparkleXrmSolution\SparkleXrmCrmPackage\CrmPackage\spkl\..\package\WebResources\dev1_\images\image0.png.data.xml
+17:24:18	Reading: C:\Repos\NetworkView\SparkleXrmSolution\SparkleXrmCrmPackage\CrmPackage\spkl\..\package\WebResources\dev1_\images\Network.png.data.xml
+17:24:18	Reading: C:\Repos\NetworkView\SparkleXrmSolution\SparkleXrmCrmPackage\CrmPackage\spkl\..\package\WebResources\dev1_\images\networkviz16.png.data.xml
+17:24:18	Reading: C:\Repos\NetworkView\SparkleXrmSolution\SparkleXrmCrmPackage\CrmPackage\spkl\..\package\WebResources\dev1_\images\overflow.png.data.xml
+17:24:18	Reading: C:\Repos\NetworkView\SparkleXrmSolution\SparkleXrmCrmPackage\CrmPackage\spkl\..\package\WebResources\dev1_\js\d3.v3.min.js.data.xml
+17:24:18	Reading: C:\Repos\NetworkView\SparkleXrmSolution\SparkleXrmCrmPackage\CrmPackage\spkl\..\package\WebResources\dev1_\js\NetworkViewClient.js.data.xml
+18:19:15	Reading mapping directives...
+18:19:15	<FileToFile map="WebResources\**\NetworkViewClient.js" to="..\dev1_\js\ClientUI.js" />
+18:19:15	<FileToFile map="WebResources\**\NetworkViewClientHooks.js" to="..\dev1_\js\ClientHooks.js" />
+18:19:15	<FileToPath map="WebResources\dev1_\*.*" to="..\dev1_\**" />
+18:19:15	<FileToPath map="WebResources\dev1_\**\*.*" to="..\dev1_\**" />
+18:19:16	
+18:19:16	Packing C:\Repos\NetworkView\SparkleXrmSolution\SparkleXrmCrmPackage\CrmPackage\package to C:\Repos\NetworkView\SparkleXrmSolution\SparkleXrmCrmPackage\CrmPackage\spkl\..\NetworkView_1_2_0_0_managed.zip
+18:19:16	
+18:19:16	 - Account
+18:19:16	Reading: C:\Repos\NetworkView\SparkleXrmSolution\SparkleXrmCrmPackage\CrmPackage\spkl\..\package\Entities\Account\Entity.xml
+18:19:16	Reading: C:\Repos\NetworkView\SparkleXrmSolution\SparkleXrmCrmPackage\CrmPackage\spkl\..\package\Entities\Account\RibbonDiff.xml
+18:19:16	 - Contact
+18:19:16	Reading: C:\Repos\NetworkView\SparkleXrmSolution\SparkleXrmCrmPackage\CrmPackage\spkl\..\package\Entities\Contact\Entity.xml
+18:19:16	Reading: C:\Repos\NetworkView\SparkleXrmSolution\SparkleXrmCrmPackage\CrmPackage\spkl\..\package\Entities\Contact\RibbonDiff.xml
+18:19:16	Processing Component: Roles
+18:19:16	Processing Component: Workflows
+18:19:16	Processing Component: FieldSecurityProfiles
+18:19:16	Processing Component: Templates
+18:19:16	Processing Component: EntityMaps
+18:19:16	Processing Component: EntityRelationships

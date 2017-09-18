@@ -194,3 +194,18 @@ FakesAssemblies/
 
 # Visual Studio 6 workspace options file
 *.opt
+/SparkleXrmSolution/SparkleXrmCrmPackage/CrmPackage/dev1_/js/SparkleXrmUI.dll
+/SparkleXrmSolution/SparkleXrmCrmPackage/CrmPackage/dev1_/js/SparkleXrm.dll
+/SparkleXrmSolution/SparkleXrmCrmPackage/CrmPackage/dev1_/js/Slick.dll
+/SparkleXrmSolution/SparkleXrmCrmPackage/CrmPackage/dev1_/js/Script.Web.xml
+/SparkleXrmSolution/SparkleXrmCrmPackage/CrmPackage/dev1_/js/Script.Web.dll
+/SparkleXrmSolution/SparkleXrmCrmPackage/CrmPackage/dev1_/js/Script.Knockout.xml
+/SparkleXrmSolution/SparkleXrmCrmPackage/CrmPackage/dev1_/js/Script.Knockout.dll
+/SparkleXrmSolution/SparkleXrmCrmPackage/CrmPackage/dev1_/js/Script.jQuery.xml
+/SparkleXrmSolution/SparkleXrmCrmPackage/CrmPackage/dev1_/js/Script.jQuery.UI.xml
+/SparkleXrmSolution/SparkleXrmCrmPackage/CrmPackage/dev1_/js/Script.jQuery.UI.dll
+/SparkleXrmSolution/SparkleXrmCrmPackage/CrmPackage/dev1_/js/Script.jQuery.dll
+/SparkleXrmSolution/SparkleXrmCrmPackage/CrmPackage/dev1_/js/mscorlib.xml
+/SparkleXrmSolution/SparkleXrmCrmPackage/CrmPackage/dev1_/js/mscorlib.dll
+/SparkleXrmSolution/SparkleXrmCrmPackage/CrmPackage/dev1_/js/ClientUI.dll
+/SparkleXrmSolution/SparkleXrmCrmPackage/CrmPackage/dev1_/js/ClientHooks.dll
